@@ -1,1 +1,1 @@
-This mod adds some extra cacti and desert things to the game.
+Deserts are pretty boring in default game, this mod attempts to remedy that by spicing them up with some extra flora and fauna.
