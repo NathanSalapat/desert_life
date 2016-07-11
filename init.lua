@@ -1,4 +1,73 @@
---TODO rename seperate each plant type into it's own file.
+local pp_col_box_1 = {
+   type = 'fixed',
+   fixed = {{-.2, -.5, -.2, .2, .0, .2}}
+}
+
+local pp_col_box_2 = {
+   type = 'fixed',
+   fixed = {{-.6, -.5, -.2, .2, .2, .2}}
+}
+
+local pp_col_box_3 = {
+   type = 'fixed',
+   fixed = {{-.6, -.5, -.2, .6, .2, .2}}
+}
+
+local pp_col_box_4 = {
+   type = 'fixed',
+   fixed = {{-.6, -.5, -.2, .6, .45, .2}}
+}
+
+local pp_col_box_5 = {
+   type = 'fixed',
+   fixed = {{-.6, -.5, -.2, .6, .45, .2}} -- left bottom front right top back
+}
+
+local pp_col_box_6 = {
+   type = 'fixed',
+   fixed = {{-.6, -.5, -.2, .6, .45, .2}} -- left bottom front right top back
+}
+
+local pp_col_box_7 = {
+   type = 'fixed',
+   fixed = {{-.6, -.5, -.2, .6, .45, .2}} -- left bottom front right top back
+}
+
+local prickly_pear_table = { --number, after_dig, col_box
+   {1, 'air', pp_col_box_1},
+   {2, 'desert_life:prickly_pear_1', pp_col_box_2},
+   {3, 'desert_life:prickly_pear_2', pp_col_box_3},
+   {4, 'desert_life:prickly_pear_3', pp_col_box_4},
+   {5, 'desert_life:prickly_pear_4', pp_col_box_5},
+   {6, 'desert_life:prickly_pear_5', pp_col_box_6},
+   {7, 'desert_life:prickly_pear_6', pp_col_box_7},
+}
+
+for i in ipairs (prickly_pear_table) do
+   local num = prickly_pear_table[i][1]
+   local AD = prickly_pear_table[i][2]
+   local col = prickly_pear_table[i][3]
+
+  minetest.register_node('desert_life:prickly_pear_'..num, {
+     description = 'Prickly Pear',
+     drawtype = 'mesh',
+     mesh = 'dl_pp_'..num..'.obj',
+     tiles = {name='desert_life_prickly_pear.png'},
+     groups = {oddly_breakable_by_hand=3, choppy=2, dl_pp=1,},
+     paramtype = 'light',
+     paramtype2 = 'facedir',
+     selection_box = col,
+	  collision_box = col,
+     drop = 'desert_life:prickly_pear',
+     on_punch = function(pos, node, player, pointed_thing)
+        minetest.set_node(pos, {name = AD, param2 = node.param2})
+        --TODO Player should get a prickly pear pad when punching.
+        --TODO 1 in 20 chance the player takes damage punching a prickly pear.
+     end
+     })
+end
+
+
 minetest.register_node('desert_life:prickly_pear', {
    description = 'Prickly Pear Pad',
    drawtype = 'mesh',
@@ -7,6 +76,14 @@ minetest.register_node('desert_life:prickly_pear', {
    groups = {oddly_breakable_by_hand=3, choppy=2, },
    paramtype = 'light',
    paramtype2 = 'facedir',
+   selection_box = {
+      type = 'fixed',
+      fixed = {{-.2, -.5, -.2, .2, .0, .2}}
+   },
+   collision_box = {
+      type = 'fixed',
+      fixed = {{-.2, -.5, -.2, .2, .0, .2}} -- left bottom front right top back
+   },
    drop = 'desert_life:prickly_pear',
    after_place_node = function(pos, placer, itemstack)
       local under = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
@@ -15,22 +92,7 @@ minetest.register_node('desert_life:prickly_pear', {
          minetest.set_node(pos, {name = 'desert_life:prickly_pear_1', param2 = node.param2})
       end
    end,
-   })
-
---TODO each node needs its own collision/selection box.
-
-for i=1,7 do
-  minetest.register_node('desert_life:prickly_pear_'..i, {
-     description = 'Prickly Pear',
-     drawtype = 'mesh',
-     mesh = 'dl_pp_'..i..'.obj',
-     tiles = {name='desert_life_prickly_pear.png'},
-     groups = {oddly_breakable_by_hand=3, choppy=2, dl_pp=1,},
-     paramtype = 'light',
-     paramtype2 = 'facedir',
-     drop = 'desert_life:prickly_pear '..i,
-     })
-end
+})
 
 --I don't believe this section is actually working right now.
 minetest.register_decoration({
@@ -52,8 +114,8 @@ minetest.register_decoration({
 
 minetest.register_abm{
 	nodenames = {"group:dl_pp"},
-	interval = 5,
-	chance = 5,
+	interval = 60,
+	chance = 20,
 	action = function(pos)
       local node = minetest.get_node(pos)
       if node.name == 'desert_life:prickly_pear_1' then
