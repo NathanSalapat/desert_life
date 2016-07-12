@@ -20,17 +20,17 @@ local pp_col_box_4 = {
 
 local pp_col_box_5 = {
    type = 'fixed',
-   fixed = {{-.6, -.5, -.2, .6, .45, .2}} -- left bottom front right top back
+   fixed = {{-.7, -.5, -.2, .7, .7, .2}}
 }
 
 local pp_col_box_6 = {
    type = 'fixed',
-   fixed = {{-.6, -.5, -.2, .6, .45, .2}} -- left bottom front right top back
+   fixed = {{-.7, -.5, -.2, .7, .7, .2}}
 }
 
 local pp_col_box_7 = {
    type = 'fixed',
-   fixed = {{-.6, -.5, -.2, .6, .45, .2}} -- left bottom front right top back
+   fixed = {{-.6, -.5, -.2, .6, .9, .2}}
 }
 
 local prickly_pear_table = { --number, after_dig, col_box
@@ -61,8 +61,12 @@ for i in ipairs (prickly_pear_table) do
      drop = 'desert_life:prickly_pear',
      on_punch = function(pos, node, player, pointed_thing)
         minetest.set_node(pos, {name = AD, param2 = node.param2})
-        --TODO Player should get a prickly pear pad when punching.
-        --TODO 1 in 20 chance the player takes damage punching a prickly pear.
+        player:get_inventory():add_item('main', 'desert_life:prickly_pear') --If inventory is full it should be dropped.
+        local damage_chance = math.random(1,15)
+        if damage_chance == 1 then
+           local hp = player:get_hp()
+           player:set_hp(hp - 1)
+        end
      end
      })
 end
@@ -96,25 +100,25 @@ minetest.register_node('desert_life:prickly_pear', {
 
 --I don't believe this section is actually working right now.
 minetest.register_decoration({
-   deco_type = "simple",
-   place_on = {"default:desert_sand"},
-   sidelen = 16,
-   noise_params = {
-      offset = -0.012,
-      scale = 0.024,
-      spread = {x = 100, y = 100, z = 100},
-      seed = 20,
-      octaves = 3,
-      persist = 0.6
-   },
-   y_min = 1,
-   y_max = 30,
-   decoration = "desert_life:prickly_pear_1",
+		deco_type = "simple",
+		place_on = {"default:desert_sand"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.035,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 219,
+			octaves = 3,
+			persist = 0.6
+		},
+		y_min = 1,
+		y_max = 30,
+		decoration = "desert_life:prickly_pear_1",
 })
 
 minetest.register_abm{
 	nodenames = {"group:dl_pp"},
-	interval = 60,
+	interval = 10,
 	chance = 20,
 	action = function(pos)
       local node = minetest.get_node(pos)
@@ -139,7 +143,6 @@ minetest.register_abm{
       if node.name == 'desert_life:prickly_pear_7' then
 		local ran_num = math.random(1,8)
       local location = {}
-      print (ran_num)
       if ran_num == 1 then
          location = {x=pos.x+1, y=pos.y, z=pos.z}
       end
