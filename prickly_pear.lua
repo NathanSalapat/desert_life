@@ -121,8 +121,8 @@ minetest.register_decoration({
 
 minetest.register_abm{
 	nodenames = {"group:dl_pp"},
-	interval = 10,
-	chance = 20,
+	interval = 5,
+	chance = 2,
 	action = function(pos)
       local node = minetest.get_node(pos)
       if node.name == 'desert_life:prickly_pear_1' then
@@ -144,44 +144,7 @@ minetest.register_abm{
 		minetest.set_node(pos, {name = "desert_life:prickly_pear_7", param2 = node.param2})
       end
       if node.name == 'desert_life:prickly_pear_7' then
-		local ran_num = math.random(1,8)
-      local location = {}
-      if ran_num == 1 then
-         location = {x=pos.x+1, y=pos.y, z=pos.z}
-      end
-      if ran_num == 2 then
-         location = {x=pos.x+1, y=pos.y, z=pos.z+1}
-      end
-      if ran_num == 3 then
-         location = {x=pos.x, y=pos.y, z=pos.z+1}
-      end
-      if ran_num == 4 then
-         location = {x=pos.x-1, y=pos.y, z=pos.z+1}
-      end
-      if ran_num == 5 then
-         location = {x=pos.x-1, y=pos.y, z=pos.z}
-      end
-      if ran_num == 6 then
-         location = {x=pos.x-1, y=pos.y, z=pos.z-1}
-      end
-      if ran_num == 7 then
-         location = {x=pos.x, y=pos.y, z=pos.z-1}
-      end
-      if ran_num == 8 then
-         location = {x=pos.x+1, y=pos.y, z=pos.z-1}
-      end
-      local under_location = ({x=location.x, y=location.y-1, z=location.z})
-      local under_name = minetest.get_node_or_nil(under_location)
-      local location_name = minetest.get_node_or_nil(location)
-      print (under_name.name)
-      if under_name.name == 'default:sand' or under_name.name == 'default:desert_sand' then
-            if location_name.name == 'air' then
-               local face_ran = math.random(0,3)
-               print 'facedir'
-               print (face_ran)
-               minetest.set_node(location, {name = 'desert_life:prickly_pear_1', param2 = face_ran})
-         end
-      end
+         desert_life.spread('desert_life:prickly_pear_1', pos, 'default:desert_sand', 'air')
    end
 end,
 }
