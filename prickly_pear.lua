@@ -53,7 +53,7 @@ for i in ipairs (prickly_pear_table) do
      drawtype = 'mesh',
      mesh = 'dl_pp_'..num..'.obj',
      tiles = {name='dl_prickly_pear.png'},
-     groups = {oddly_breakable_by_hand=3, choppy=2, dl_pp=1, not_in_creative_inventory=1},
+     groups = {not_in_creative_inventory=1},
      paramtype = 'light',
      paramtype2 = 'facedir',
      selection_box = col,
@@ -81,7 +81,7 @@ minetest.register_node('desert_life:prickly_pear', {
    drawtype = 'mesh',
    mesh = 'dl_pp_1.obj',
    tiles = {name='dl_prickly_pear.png'},
-   groups = {oddly_breakable_by_hand=3, choppy=2, },
+   groups = {},
    paramtype = 'light',
    paramtype2 = 'facedir',
    selection_box = {

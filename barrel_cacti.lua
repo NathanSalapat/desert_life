@@ -46,6 +46,7 @@ minetest.register_node('desert_life:barrel_cacti_'..num..'_sp', {
    drawtype = 'mesh',
    mesh = 'dl_barrel_cacti_'..num..'.obj',
    tiles = {name='dl_barrel_cacti.png'},
+   drop = 'desert_life:barrel_cacti_'..num,
    groups = {oddly_breakable_by_hand=3, choppy=1, dl_bc=1},
    paramtype = 'light',
    paramtype2 = 'facedir',
@@ -70,3 +71,21 @@ minetest.register_decoration({
 		y_max = 30,
 		decoration = "desert_life:barrel_cacti_1_sp",
 })
+
+minetest.register_abm{
+	nodenames = {"group:dl_bc"},
+	interval = 30,
+	chance = 20,
+	action = function(pos)
+      local node = minetest.get_node(pos)
+      if node.name == 'desert_life:barrel_cacti_1_sp' then
+		minetest.set_node(pos, {name = "desert_life:barrel_cacti_2_sp", param2 = node.param2})
+      end
+      if node.name == 'desert_life:barrel_cacti_2_sp' then
+		minetest.set_node(pos, {name = "desert_life:barrel_cacti_3_sp", param2 = node.param2})
+      end
+      if node.name == 'desert_life:barrel_cacti_3_sp' then
+         desert_life.spread('desert_life:barrel_cacti_1_sp', pos, 'default:desert_sand', 'air')
+   end
+end,
+}
