@@ -57,7 +57,7 @@ for i in ipairs (prickly_pear_table) do
      paramtype = 'light',
      paramtype2 = 'facedir',
      selection_box = col,
-	  collision_box = col,
+	 collision_box = col,
      on_punch = function(pos, node, player, pointed_thing)
         minetest.set_node(pos, {name = AD, param2 = node.param2})
         player:get_inventory():add_item('main', 'desert_life:prickly_pear') --If inventory is full it should be dropped.
@@ -110,7 +110,7 @@ minetest.register_node('desert_life:prickly_pear', {
    drawtype = 'mesh',
    mesh = 'dl_pp_1.obj',
    tiles = {name='dl_prickly_pear.png'},
-   groups = {},
+   groups = {dig_immediate = 3},
    paramtype = 'light',
    paramtype2 = 'facedir',
    selection_box = {
