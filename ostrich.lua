@@ -19,9 +19,9 @@ mobs:register_mob("desert_life:ostrich", {
 	},
     visual_size = {x=9, y=9},
 	makes_footstep_sound = true,
-	sounds = {
-		random = "mobs_chicken",
-	},
+--	sounds = {
+--		random = "mobs_chicken",
+--	},
 	walk_velocity = 1,
 	run_velocity = 3,
 	jump = true,
@@ -50,9 +50,12 @@ mobs:register_mob("desert_life:ostrich", {
 	},
 	follow = {"farming:seed_wheat", "farming:seed_cotton"},
 	view_range = 5,
+   replace_what = {'group:flora', 'group:plant'},
+   replace_with = 'air',
+   replace_rate = 1,
 })
 
 mobs:register_spawn("desert_life:ostrich",
-	{"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 20, 10, 1500, 1, 31000, true)
+	{"default:desert_sand", "default:desert_stone"}, 20, 10, 1500, 1, 31000, true)
 
-mobs:register_egg("desert_life:ostrich", S("Ostrich"), "mobs_chicken_inv.png", 0)
+mobs:register_egg("desert_life:ostrich", S("Ostrich"), "dl_ostrich_inv.png", 0)
