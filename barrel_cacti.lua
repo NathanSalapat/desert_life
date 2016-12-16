@@ -47,7 +47,7 @@ minetest.register_node('desert_life:barrel_cacti_'..num..'_sp', {
    mesh = 'dl_barrel_cacti_'..num..'.obj',
    tiles = {name='dl_barrel_cacti.png'},
    drop = 'desert_life:barrel_cacti_'..num,
-   groups = {oddly_breakable_by_hand=3, choppy=1, dl_bc=1},
+   groups = {oddly_breakable_by_hand=3, choppy=1, dl_bc=1, not_in_creative_inventory=1},
    paramtype = 'light',
    paramtype2 = 'facedir',
    selection_box = col,
