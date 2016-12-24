@@ -150,8 +150,8 @@ minetest.register_decoration({
 
 minetest.register_abm{
 	nodenames = {"group:dl_pp"},
-	interval = 30,
-	chance = 20,
+	interval = 40,
+	chance = 30,
 	action = function(pos)
       local node = minetest.get_node(pos)
       if node.name == 'desert_life:prickly_pear_1' then
@@ -181,8 +181,8 @@ minetest.register_abm{
 if desert_life_bloom == true then
    minetest.register_abm{
       nodenames = {"group:dl_pp"},
-      interval = 30,
-      chance = 20,
+      interval = 1,
+      chance = 2,
       action = function(pos)
          if mymonths.month_counter == 4
          or mymonths.month_counter == 5
