@@ -74,8 +74,8 @@ minetest.register_decoration({
 
 minetest.register_abm{
 	nodenames = {"group:dl_bc"},
-	interval = 1,
-	chance = 1,
+	interval = 40,
+	chance = 30,
 	action = function(pos)
       local node = minetest.get_node(pos)
       if node.name == 'desert_life:barrel_cacti_1_sp' then
