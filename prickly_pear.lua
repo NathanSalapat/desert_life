@@ -173,7 +173,7 @@ minetest.register_abm{
 		minetest.set_node(pos, {name = "desert_life:prickly_pear_7", param2 = node.param2})
       end
       if node.name == 'desert_life:prickly_pear_7' then
-         desert_life.spread('desert_life:prickly_pear_1', pos, 'default:desert_sand', 'air')
+         desert_life.spread('desert_life:prickly_pear_1', pos, 1, 'default:desert_sand', 'air', 22)
       end
    end,
 }

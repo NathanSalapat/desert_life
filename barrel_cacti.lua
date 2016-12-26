@@ -74,8 +74,8 @@ minetest.register_decoration({
 
 minetest.register_abm{
 	nodenames = {"group:dl_bc"},
-	interval = 30,
-	chance = 20,
+	interval = 1,
+	chance = 1,
 	action = function(pos)
       local node = minetest.get_node(pos)
       if node.name == 'desert_life:barrel_cacti_1_sp' then
@@ -85,7 +85,7 @@ minetest.register_abm{
 		minetest.set_node(pos, {name = "desert_life:barrel_cacti_3_sp", param2 = node.param2})
       end
       if node.name == 'desert_life:barrel_cacti_3_sp' then
-         desert_life.spread('desert_life:barrel_cacti_1_sp', pos, 'default:desert_sand', 'air')
+         desert_life.spread('desert_life:barrel_cacti_1_sp', pos, 2, 'default:desert_sand', 'air', 48)
    end
 end,
 }
