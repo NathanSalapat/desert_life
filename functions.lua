@@ -43,7 +43,6 @@ function desert_life.spread(nodename, pos, spread, undernode, replacing, needed_
    		local can_replace = minetest.find_nodes_in_area(pos0, pos1, replacing)
          local replace_num = #can_replace
          if replace_num >= needed_air then --increase to decrease number of plants.
-            print ('spreading plant because found '..replace_num..' of '..needed_air..' air.')
             local face_ran = math.random(0,3)
             minetest.set_node(location, {name = nodename, param2 = face_ran})
          end

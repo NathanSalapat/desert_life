@@ -1,7 +1,8 @@
 desert_life = {}
 
 if minetest.get_modpath('mymonths') then
-   desert_life_bloom = true
+   desert_life.bloom = true
+   print 'mymonths is here, lets make things bloom.'
 end
 
 dofile(minetest.get_modpath('desert_life')..'/functions.lua')

@@ -74,7 +74,7 @@ for i in ipairs (prickly_pear_table) do
      end
      })
 
-     if desert_life_bloom == true then
+     if desert_life.bloom == true then
         minetest.register_node('desert_life:prickly_pear_'..num..'_bloom', {
            description = 'Blooming Prickly Pear',
            drawtype = 'mesh',
@@ -178,7 +178,8 @@ minetest.register_abm{
    end,
 }
 
-if desert_life_bloom == true then
+if desert_life.bloom == true then
+   print 'mymonths is enabled.'
    minetest.register_abm{
       nodenames = {"group:dl_pp"},
       interval = 1,
