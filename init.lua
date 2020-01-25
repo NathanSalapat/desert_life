@@ -6,7 +6,7 @@ if minetest.get_modpath('mymonths') then
 end
 
 
-dofile(minetest.get_modpath('desert_life').."/config.lua") -- Oversword
+dofile(minetest.get_modpath('desert_life')..'/config.lua') -- Oversword
 dofile(minetest.get_modpath('desert_life')..'/functions.lua')
 dofile(minetest.get_modpath('desert_life')..'/prickly_pear.lua')
 dofile(minetest.get_modpath('desert_life')..'/barrel_cacti.lua')
